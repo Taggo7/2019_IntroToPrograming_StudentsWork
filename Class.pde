@@ -19,7 +19,7 @@ class Object {
   int petalColor;    //hexadecimal number for the color of petals
   int BeeColor;      //hexadecimal number for the color of the circle
 
-  
+  // constructor overloading --> when you have different parameters for creating an instance of a class
     //flower object
   Object(float _r, int _n_petals, float _x, float _y, int _petalColor, float _speed) {
     r=_r;
@@ -32,11 +32,11 @@ class Object {
   
   //Bee object
   Object(float _r, float _x, float _y, int _BeeColor, float _speed){
-  r=_r;
-  x=_x;
-  y=_y;
-  speed=_speed;
-  BeeColor=_BeeColor;
+    r=_r;
+    x=_x;
+    y=_y;
+    speed=_speed;
+    BeeColor=_BeeColor;
 }
     //making the flower
   void displayFlower () {
@@ -51,14 +51,14 @@ class Object {
   }
   
       //making the bee
-  void displayBee(){
-    fill(#F7ED23);
+  void displayBee(float x, float y, float newR){
+    fill(#F7ED23, newR + 200);
       strokeWeight(7);
   //Draw the bee body
   ellipse(x, y, BeeSizeX, BeeSizeY);
 
   //Draw the eye
-  fill(0, 0, 0);
+  fill(0, 0, 0, newR + 200);
   ellipse(x+60, y-10, EyeSize, EyeSize);
 
   //bees stripes
@@ -71,7 +71,7 @@ class Object {
   //bee wings
   push();
   strokeWeight(1);
-  fill(255,255,255);
+  fill(255,255,255, newR + 200);
   ellipse(x-20, y-110, WingX, WingY);
   ellipse(x+10, y-110, WingX, WingY);
   pop();
@@ -92,18 +92,20 @@ class Object {
   boolean overlaps(Object someOtherObject) {
     if (dist(x, y, someOtherObject.x, someOtherObject.y)<(r+someOtherObject.r))
     {
+      println("Overlapping: ", x, y, someOtherObject.x, someOtherObject.y);
       return true;
     } 
     else
     {
+      println("NOT Overlapping: ", x, y, someOtherObject.x, someOtherObject.y);
       return false;
     }
   }
   
 float mousePressed_x () {
   if (mousePressed) {
-  x = mouseX;
-}
+    x = mouseX;
+  }
   return x; //returns the initial x-value
 }
 
